@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> fetchData(String searchText) async {
     final response = await http.get(
-      Uri.parse('https://rucspy.ddns.net/v1/ruc/$searchText'),
+      Uri.parse('https://rucspy.ddns.net/v1/listaruc/$searchText'),
     );
 
     print(response.statusCode);
