@@ -18,8 +18,9 @@ class RucInfo {
       id: json['id'] as int,
       ruc: json['ruc'] as String,
       razonSocial: json['razonSocial'] as String,
-      digitoVerificador: ['digitoVerificador'] as int,
-      estado: ['estado'] as String,
+      digitoVerificador: json['digitoVerificador'] as int,
+      estado: json['estado'] as String,
     );
   }
+
 }
