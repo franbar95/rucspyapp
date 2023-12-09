@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:rucspyapp/models/rucinfo.dart';
 
 void main() {
@@ -14,6 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Consulta de RUC',
       home: MyHomePage(),
     );
   }
@@ -50,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         listaRucs = listaDesdeJson(decodedBody);
       });
     } else {
-      throw Exception('Failed to load data');
+      throw Exception('Error al obtener los datos.!');
     }
   }
 
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter API Search'),
+        title: const Text('Consulta de RUC'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -69,28 +70,19 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (value) {
                 texto = value;
               },
-              decoration: InputDecoration(
-                labelText: 'Ingrese texto',
+              decoration: const InputDecoration(
+                labelText: 'Ingrese RUC sin el -#',
               ),
             ),
-            SizedBox(height: 16),
-            DropdownSearch<String>(
-              items: ['Opción 1', 'Opción 2', 'Opción 3'],
-              onChanged: (String? value) {
-                setState(() {
-                  selectedOption = value ?? '';
-                });
-              },
-            ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 // Trigger API search
                 fetchData(texto);
               },
-              child: Text('Buscar'),
+              child: const Text('Buscar'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
               child: ListView(
                 children: listaRucs.map((e) => RucView(rucInfo: e)).toList(),
